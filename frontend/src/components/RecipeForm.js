@@ -1,62 +1,41 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+
+// Use backend URL from environment variable
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 function RecipeForm({ fetchRecipes }) {
-  const [title, setTitle] = useState('');
-  const [ingredients, setIngredients] = useState('');
-  const [steps, setSteps] = useState('');
+  const [recipeName, setRecipeName] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!recipeName.trim()) return;
 
     try {
-      const ingredientArray = ingredients.split(',').map(item => item.trim());
-
-      await axios.post('http://localhost:5000/api/recipes', {
-        title,
-        ingredients: ingredientArray,
-        steps
+      await fetch(`${BASE_URL}/api/recipes`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: recipeName }),
       });
-
-      // Clear form after submission
-      setTitle('');
-      setIngredients('');
-      setSteps('');
-
-      // Refresh recipe list
-      fetchRecipes();
-    } catch (error) {
-      console.error("Error adding recipe:", error);
-      alert("Failed to add recipe. Make sure backend is running!");
+      setRecipeName(""); // clear input
+      fetchRecipes(); // refresh the list
+    } catch (err) {
+      console.error("Error adding recipe:", err);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
       <input
         type="text"
-        placeholder="Recipe Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        value={recipeName}
+        onChange={(e) => setRecipeName(e.target.value)}
+        placeholder="Enter recipe name"
         required
+        style={{ padding: "8px", marginRight: "10px", width: "200px" }}
       />
-
-      <input
-        type="text"
-        placeholder="Ingredients (comma separated)"
-        value={ingredients}
-        onChange={(e) => setIngredients(e.target.value)}
-        required
-      />
-
-      <textarea
-        placeholder="Steps"
-        value={steps}
-        onChange={(e) => setSteps(e.target.value)}
-        required
-      />
-
-      <button type="submit">Add Recipe</button>
+      <button type="submit" style={{ padding: "8px 16px" }}>
+        Add Recipe
+      </button>
     </form>
   );
 }
