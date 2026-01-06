@@ -13,7 +13,7 @@ app.use(express.json());
 const MONGO_URI = process.env.MONGO_URI;
 
 if (!MONGO_URI) {
-  console.error("❌ MONGO_URI is missing in backend/.env");
+  console.error("❌ MONGO_URI is missing in backend/.env or Render environment variables");
   process.exit(1);
 }
 
@@ -28,6 +28,11 @@ mongoose
 /* ---------- Routes ---------- */
 const recipeRoutes = require("./routes/recipeRoutes");
 app.use("/api/recipes", recipeRoutes);
+
+/* ---------- Root Test Route ---------- */
+app.get("/", (req, res) => {
+  res.send("Recipe Book backend is running 🚀");
+});
 
 /* ---------- Server ---------- */
 const PORT = process.env.PORT || 5000;
