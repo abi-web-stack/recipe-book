@@ -1,0 +1,98 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f6f7fb;
+}
+
+/* Main container */
+.app-container {
+  max-width: 720px;
+  margin: 50px auto;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  color: #6b5b95;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Form layout */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 35px;
+}
+
+input,
+textarea {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #a3c4f3;
+  box-shadow: 0 0 0 3px rgba(163, 196, 243, 0.3);
+}
+
+/* Primary button */
+button {
+  background-color: #a3c4f3;
+  color: #1f2937;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+button:hover {
+  background-color: #90dbf4;
+  transform: translateY(-1px);
+}
+
+/* Recipe card */
+.recipe-card {
+  background: #fde2e4;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+.recipe-card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #5f0f40;
+}
+
+.recipe-card p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Delete button */
+.delete-btn {
+  margin-top: 12px;
+  background-color: #ffafcc;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.delete-btn:hover {
+  background-color: #ffc8dd;
+}
